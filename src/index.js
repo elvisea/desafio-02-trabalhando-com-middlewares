@@ -11,7 +11,7 @@ const users = [];
 
 function checksExistsUserAccount(request, response, next) {
   // Complete aqui
-  const {username} = request.headers;
+  const { username } = request.headers;
 
   const user = users.find((user) => user.username === username)
 
@@ -26,7 +26,7 @@ function checksExistsUserAccount(request, response, next) {
 
 function checksCreateTodosUserAvailability(request, response, next) {
   // Complete aqui
-  const {user} = request;
+  const { user } = request;
 
   const numberOfTodo = user.todos.length; 
   const userIsPro = user.pro;
@@ -43,8 +43,8 @@ function checksCreateTodosUserAvailability(request, response, next) {
 
 function checksTodoExists(request, response, next) {
   // Complete aqui
-  const {username} = request.headers;
-  const {id} = request.params;
+  const { username } = request.headers;
+  const { id } = request.params;
 
   if (!validate(id)) {
     return response.status(400).json({error: "not valid uuid"});
@@ -170,7 +170,7 @@ app.delete('/todos/:id', checksExistsUserAccount, checksTodoExists, (request, re
 
   user.todos.splice(todoIndex, 1);
 
-  return response.status(204).send();
+  return response.status(204).json({ message: 'Tarefa Deletada' });
 });
 
 module.exports = {
